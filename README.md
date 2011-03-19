@@ -10,6 +10,4 @@ So I wrote an add-on to reduce the number of steps. With the Github Bugzilla Twe
 
 To make it work, just title your pull request starting with "bug ######", replacing # with the bug id from Bugzilla. The add-on logs into Bugzilla with the stored credentials found in the Firefox password manager.
 
-Install.
-
-Source code.
+<a title="Install" href="http://j.mp/fp2xKV">Install</a>.
