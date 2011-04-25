@@ -4,5 +4,5 @@ To make it work, title your pull request starting with "bug ######", replacing #
 
 This allows reviewers to comment on your pull request from within Bugzilla itself.
 
-<a title="Install" href="http://j.mp/dYtZbs">Install</a>.
-<a title="Source" href="http://j.mp/g2LLee">Source on Github</a>.
+<p><a title="Install" href="http://j.mp/dYtZbs">Install</a>.</p>
+<p><a title="Source" href="http://j.mp/g2LLee">Source on Github</a>.</p>
