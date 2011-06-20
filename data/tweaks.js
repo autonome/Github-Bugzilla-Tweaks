@@ -23,9 +23,14 @@ function send(bugNumber, pullRequestURL) {
 
 // Search for a bug number in a string starting with: "bug ######"
 function getBugNumber(str) {
-  var parts = str.split(" ");
-  return (parts.length > 1 &&
-          parts[0].toLowerCase() == "bug" &&
-          parts[1].search(/^[0-9]{6}/) != -1)
-    ? parts[1].substr(0, 6) : null;
+  // Normalize string
+  var parts = String(str).toLowerCase().
+                          // Split into parts.
+                          split(/\s+|\-+/g).
+                          // Remove empty parts.
+                          filter(function(part) { return !!part; });
+  // Index of a bug number argument.
+  var index = parts.indexOf("bug") + 1;
+  // If bug is followed by a bug number return it otherwise `null`.
+  return /^[0-9]{6}/.test(parts[index]) ? parts[index] : null;
 }
