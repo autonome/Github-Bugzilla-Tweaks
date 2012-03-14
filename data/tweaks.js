@@ -1,8 +1,10 @@
+var BGZ_URL = 'https://bugzilla.mozilla.org/show_bug.cgi?id=';
 var list = document.getElementsByClassName("js-hard-tabs smalltabs")[0];
 
 if (list) {
   var bug = getBugNumber(document.title);
-  if (!bug) {
+  if (bug) linkify();
+  else {
     // Some projects use a modified gitflow process and use branch names
     // of the format "bug/nnnn-bug-description", so see if we can infer the
     // bug number from the branch name.
@@ -14,7 +16,7 @@ if (list) {
   }
   console.log("BUG #: " + bug);
   var li = document.createElement("li");
-  
+
   if (bug)
     li.innerHTML = "<a href='#'>Attach to Bug " + bug + "</a>";
   else
@@ -43,4 +45,15 @@ function getBugNumber(str) {
   var index = parts.indexOf("bug") + 1;
   // If bug is followed by a bug number return it otherwise `null`.
   return /^[0-9]{6}/.test(parts[index]) ? parts[index] : null;
+}
+
+// Converts 'bug ######' string in pull request title to a link to that
+// bug.
+function linkify() {
+  var title = document.querySelector('.starting-comment .content-title');
+  if (title) {
+    title.innerHTML =
+    title.innerHTML.
+          replace(/(bug\s*([0-9]{6}))/i, '<a href="' + BGZ_URL + '$2">$1</a>');
+  }
 }
