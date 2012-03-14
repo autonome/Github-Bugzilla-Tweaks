@@ -44,7 +44,7 @@ function getBugNumber(str) {
   // Index of a bug number argument.
   var index = parts.indexOf("bug") + 1;
   // If bug is followed by a bug number return it otherwise `null`.
-  return /^[0-9]{6}/.test(parts[index]) ? parts[index] : null;
+  return /^[0-9]{6}/.test(parts[index]) ? parts[index].substr(0, 6) : null;
 }
 
 // Converts 'bug ######' string in pull request title to a link to that
