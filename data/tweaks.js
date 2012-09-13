@@ -1,5 +1,5 @@
 var BGZ_URL = 'https://bugzilla.mozilla.org/show_bug.cgi?id=';
-var list = document.getElementsByClassName("js-hard-tabs smalltabs")[0];
+var list = document.getElementsByClassName("tabnav-tabs")[0];
 
 if (list) {
   var bug = getBugNumber(document.title);
@@ -15,22 +15,18 @@ if (list) {
     }
   }
   console.log("BUG #: " + bug);
-  var li = document.createElement("li");
 
-  if (bug)
-    li.innerHTML = "<a href='#'>Attach to Bug " + bug + "</a>";
-  else
-    li.innerHTML = "<a href='#'>Attach to a New Bug</a>";
-
-  li.addEventListener("click", function() {
+  var li = makeButton(list, bug);
+  li.addEventListener("click", function(event) {
     send(bug, document.location.toString());
-  }, false);
+    event.stopPropagation();
+  }, true);
 
   list.appendChild(li);
 }
 
 function send(bugNumber, pullRequestURL) {
-  postMessage({bug: bugNumber, url: pullRequestURL});
+  self.postMessage({ bug: bugNumber, url: pullRequestURL});
 }
 
 // Search for a bug number in a string starting with: "bug ######"
@@ -50,10 +46,20 @@ function getBugNumber(str) {
 // Converts 'bug ######' string in pull request title to a link to that
 // bug.
 function linkify() {
-  var title = document.querySelector('.starting-comment .content-title');
+  var title = document.querySelector('.discussion-topic-title');
   if (title) {
     title.innerHTML =
     title.innerHTML.
           replace(/(bug\s*([0-9]{6}))/i, '<a href="' + BGZ_URL + '$2">$1</a>');
   }
+}
+
+function makeButton(containerNode, bug) {
+  // Use second node since firs one is selected.
+  var buttonNode = containerNode.children[1].cloneNode();
+  var linkNode = buttonNode.querySelector('a');
+  linkNode.setAttribute('href', '#attch-to-bugzilla');
+  linkNode.textContent = bug ? "Attach to Bug " + bug :
+                               "Submit Bug";
+  return buttonNode;
 }
