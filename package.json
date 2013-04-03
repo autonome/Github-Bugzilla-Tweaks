@@ -2,8 +2,8 @@
     "name": "github-and-bugzilla", 
     "license": "MPL 1.1/GPL 2.0/LGPL 2.1", 
     "author": "Dietrich Ayala", 
-    "version": "1.9",
-    "fullName": "Github tweaks for Bugzilla", 
+    "version": "1.10",
+    "fullName": "Github Tweaks for Bugzilla", 
     "id": "jid0-AWShpy08txla2QGDYvv5bed4sjs", 
     "description": "A set of changes to Github that make it easier to integrate with bugzilla.mozilla.org."
 }
