@@ -3,26 +3,35 @@ var list = document.getElementsByClassName("tabnav-tabs")[0];
 
 if (list) {
   var bug = getBugNumber(document.title);
-  if (bug) linkify();
+  if (bug) {
+    linkify()
+  }
   else {
     // Some projects use a modified gitflow process and use branch names
     // of the format "bug/nnnn-bug-description", so see if we can infer the
     // bug number from the branch name.
     var branchSpan = document.getElementsByClassName("commit-ref from")[0];
-    var branchMatch = branchSpan.textContent.match(/^bug\/([0-9]{6})/);
-    if (branchMatch) {
-      bug = branchMatch[1];
+    if (branchSpan) {
+      var branchMatch = branchSpan.textContent.match(/^bug\/([0-9]{6})/);
+      if (branchMatch) {
+        bug = branchMatch[1];
+      }
     }
   }
-  console.log("BUG #: " + bug);
 
-  var li = makeButton(list, bug);
-  li.addEventListener("click", function(event) {
-    send(bug, document.location.toString());
-    event.stopPropagation();
-  }, true);
+  if (!bug) {
+    console.log('No bug number found in PR page!')
+  }
+  else {
+    console.log("BUG #: " + bug);
+    var li = makeButton(list, bug);
+    li.addEventListener("click", function(event) {
+      send(bug, document.location.toString());
+      event.stopPropagation();
+    }, true);
 
-  list.appendChild(li);
+    list.appendChild(li);
+  }
 }
 
 function send(bugNumber, pullRequestURL) {
