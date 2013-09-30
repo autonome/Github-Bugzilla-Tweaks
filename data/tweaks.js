@@ -26,8 +26,11 @@ if (list) {
     console.log("BUG #: " + bug);
     var li = makeButton(list, bug);
     li.addEventListener("click", function(event) {
-      send(bug, document.location.toString());
-      event.stopPropagation();
+      var confirmation = confirm("Are you sure you want to do this?");
+      if (confirmation) {
+        send(bug, document.location.toString());
+        event.stopPropagation();
+      };
     }, true);
 
     list.appendChild(li);
