@@ -67,7 +67,7 @@ function linkify() {
 
 function makeButton(containerNode, bug) {
   // Use second node since firs one is selected.
-  var buttonNode = containerNode.children[1].cloneNode();
+  var buttonNode = containerNode.children[1].cloneNode(true);
   var linkNode = buttonNode.querySelector('a');
   linkNode.setAttribute('href', '#attch-to-bugzilla');
   linkNode.textContent = bug ? "Attach to Bug " + bug :
