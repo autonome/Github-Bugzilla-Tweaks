@@ -57,7 +57,7 @@ function getBugNumber(str) {
 // Converts 'bug ######' string in pull request title to a link to that
 // bug.
 function linkify() {
-  var title = document.querySelector('.discussion-topic-title');
+  var title = document.querySelector('.js-issue-title');
   if (title) {
     title.innerHTML =
     title.innerHTML.
