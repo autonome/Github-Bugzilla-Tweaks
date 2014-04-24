@@ -12,7 +12,7 @@ if (list) {
     // bug number from the branch name.
     var branchSpan = document.getElementsByClassName("commit-ref from")[0];
     if (branchSpan) {
-      var branchMatch = branchSpan.textContent.match(/^bug\/([0-9]{6})/);
+      var branchMatch = branchSpan.textContent.match(/^bug\/(\d{6,})/);
       if (branchMatch) {
         bug = branchMatch[1];
       }
@@ -51,7 +51,8 @@ function getBugNumber(str) {
   // Index of a bug number argument.
   var index = parts.indexOf("bug") + 1;
   // If bug is followed by a bug number return it otherwise `null`.
-  return /^[0-9]{6}/.test(parts[index]) ? parts[index].substr(0, 6) : null;
+  var match = parts[index].match(/^(\d{6,})/);
+  return match ? match[1] : null;
 }
 
 // Converts 'bug ######' string in pull request title to a link to that
