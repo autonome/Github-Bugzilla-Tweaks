@@ -12,7 +12,7 @@ if (list) {
     // bug number from the branch name.
     var branchSpan = document.getElementsByClassName("commit-ref from")[0];
     if (branchSpan) {
-      var branchMatch = branchSpan.textContent.match(/^bug\/(\d{6,})/);
+      var branchMatch = branchSpan.textContent.match(/^bug\/(\d{5,})/);
       if (branchMatch) {
         bug = branchMatch[1];
       }
@@ -51,7 +51,7 @@ function getBugNumber(str) {
   // Index of a bug number argument.
   var index = parts.indexOf("bug") + 1;
   // If bug is followed by a bug number return it otherwise `null`.
-  var match = parts[index].match(/^(\d{6,})/);
+  var match = parts[index].match(/^(\d{5,})/);
   return match ? match[1] : null;
 }
 
@@ -62,7 +62,7 @@ function linkify() {
   if (title) {
     title.innerHTML =
     title.innerHTML.
-          replace(/(bug\s*([0-9]{6}))/i, '<a href="' + BGZ_URL + '$2">$1</a>');
+          replace(/(bug\s*([0-9]{5,}))/i, '<a href="' + BGZ_URL + '$2">$1</a>');
   }
 }
 
