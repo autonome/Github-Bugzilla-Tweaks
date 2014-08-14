@@ -1,6 +1,8 @@
 var BGZ_URL = 'https://bugzilla.mozilla.org/show_bug.cgi?id=';
 var list = document.getElementsByClassName("tabnav-tabs")[0];
 
+checkMultipleCommits();
+
 if (list) {
   var bug = getBugNumber(document.title);
   if (bug) {
@@ -76,4 +78,13 @@ function makeButton(containerNode, bug) {
   linkNode.textContent = bug ? "Attach to Bug " + bug :
                                "Submit Bug";
   return buttonNode;
+}
+
+function checkMultipleCommits() {
+  var merge = document.querySelector('.merge-pr');
+  var commits = +document.querySelector('#commits_tab_counter').textContent;
+  if (commits > 1 && merge) { 
+    merge.setAttribute('aria-label', 'WARNING:\n ' + commits + '  commits,\n squash maybe?');
+    merge.classList.add('tooltipped', 'tooltipped-e');
+  }
 }
