@@ -27,7 +27,9 @@ if (list) {
     var li = makeButton(list, bug);
     var a = li.querySelector('a');
     a.addEventListener("click", function(event) {
-      send(bug, document.location.toString());
+      let url = document.location.toString();
+      url = url.replace(/\/(files|commits)$/, '');
+      send(bug, url);
       event.stopPropagation();
       event.preventDefault();
     });
