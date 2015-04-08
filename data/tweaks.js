@@ -27,8 +27,7 @@ if (list) {
   else {
     console.log("BUG #: " + bug);
     var li = makeButton(list, bug);
-    var a = li.querySelector('a');
-    a.addEventListener("click", function(event) {
+    li.addEventListener("click", function(event) {
       let url = document.location.toString();
       url = url.replace(/\/(files|commits)$/, '');
       send(bug, url);
@@ -71,12 +70,11 @@ function linkify() {
 }
 
 function makeButton(containerNode, bug) {
-  // Use second node since firs one is selected.
+  // Use second node since the first one is selected.
   var buttonNode = containerNode.children[1].cloneNode(true);
-  var linkNode = buttonNode.querySelector('a');
-  linkNode.setAttribute('href', '#attch-to-bugzilla');
-  linkNode.textContent = bug ? "Attach to Bug " + bug :
-                               "Submit Bug";
+  buttonNode.setAttribute('href', '#attch-to-bugzilla');
+  buttonNode.textContent = bug ? "Attach to Bug " + bug :
+                                 "Submit Bug";
   return buttonNode;
 }
 
